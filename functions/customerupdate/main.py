@@ -5,7 +5,7 @@ def getsecret(secretname, version):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-def itemupdatecart(request):
+def customerupdate(request):
     import psycopg2
     dbname = getsecret("dbname", 1)
     user = "postgres"
