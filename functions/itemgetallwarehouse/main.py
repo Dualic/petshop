@@ -10,9 +10,9 @@ def warehouse(request):
     dbname = getsecret("dbname", 1)
     user = "postgres"
     password = getsecret("dbpassword", 1)
-    host = '/cloudsql/week10-1-324606:us-central1:petshop'
+    host = getsecret("host", 1)
     conn = None
-    SQL = "SELECT * FROM customer;"
+    SQL = "SELECT * FROM warehouse;"
     results = []
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)

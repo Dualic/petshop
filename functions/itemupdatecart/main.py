@@ -10,7 +10,7 @@ def itemupdatecart(request):
     dbname = getsecret("dbname", 1)
     user = "postgres"
     password = getsecret("dbpassword", 1)
-    host = '/cloudsql/week10-1-324606:us-central1:petshop'
+    host = getsecret("host", 1)
     conn = None
     request_json = request.get_json(silent=True)
     id = request_json.get("id")
