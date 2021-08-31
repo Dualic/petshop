@@ -14,7 +14,7 @@ paths:
       summary: add to cart
       operationId: additem
       x-google-backend:
-        address: us-central1-week10-1-324606.cloudfunctions.net/function-name
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/readwarehouse
       consumes:
         - application/json
       parameters:
@@ -45,7 +45,7 @@ paths:
       summary: remove from cart
       operationId: deleteitem
       x-google-backend:
-        address: us-central1-week10-1-324606.cloudfunctions.net/function-name
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/readwarehouse
       consumes:
         - application/json
       parameters:
@@ -67,7 +67,7 @@ paths:
       summary: update item in cart
       operationId: updateitem
       x-google-backend:
-        address: us-central1-week10-1-324606.cloudfunctions.net/function-name
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/readwarehouse
       consumes:
         - application/json
       parameters:
@@ -102,7 +102,7 @@ paths:
       description: returns a single item
       operationId: itempbyid
       x-google-backend:
-          address: us-central1-week10-1-324606.cloudfunctions.net/function-name
+          address: https://us-central1-week10-1-324606.cloudfunctions.net/readwarehouse
       produces:
       - application/json
       parameters:
@@ -117,15 +117,9 @@ paths:
           schema:
             type: object
             properties:
-              id:
-                type: integer
-                default: 0
-              user_id:
-                type: integer
-                default: 0
-              product_id:
-                type: integer
-                default: 0
+              product_name:
+                type: string
+                default: "null"
               amount:
                 type: integer
                 default: 0
