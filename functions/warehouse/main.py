@@ -13,16 +13,23 @@ def warehouse(request):
     dbname = getsecret("dbname")
     user = "postgres"
     password = getsecret("dbpassword")
-
-    SQL = "SELECT * FROM user;"
+    host = '/cloudsql/week10-1-324606:us-central1:petshop'
+    conn = None
+    SQL = "SELECT * FROM warehouse;"
+    results = []
     try:
-        conn = psycopg2.connect(host='/cloudsql/week10-1-324606:us-central1:petshop', dbname=dbname, user=user,  password=password)
+        conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
         cursor = conn.cursor()
-        cursor.execute(SQL,)
-        conn.commit()
+        cursor.execute(SQL)
+        #conn.commit()
+        row = cursor.fetchone()
+        while row is not None:
+            results.append(row)
+            row = cursor.fetchone()
+        cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
             print(error)
     finally:
         if conn is not None:
             conn.close()
-        cursor.close()
+    return results
