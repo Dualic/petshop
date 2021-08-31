@@ -21,12 +21,12 @@ def warehouse(request):
         #conn.commit()
         row = cursor.fetchone()
         while row is not None:
-            results.append(row)
+            results.append(str(row))
             row = cursor.fetchone()
         cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
             print(error)
     finally:
         if conn is not None:
-            conn.close()        
+            conn.close()      
     return "\n".join(results)
