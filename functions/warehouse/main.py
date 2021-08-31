@@ -1,21 +1,18 @@
-import psycopg2
-import google.cloud.secretmanager as secretmanager
-
-def getsecret(secretname):
+def getsecret(secretname, version):
+    import google.cloud.secretmanager as secretmanager
     client = secretmanager.SecretManagerServiceClient()
-    name = f"projects/week10-1-324606/secrets/{secretname}/versions/1"
+    name = f"projects/week10-1-324606/secrets/{secretname}/versions/{version}"
     response = client.access_secret_version(request={"name": name})
-    payload = response.payload.data.decode("UTF-8")
-    secret = "Plaintext: {}".format(payload)
-    return secret
+    return response.payload.data.decode("UTF-8")
 
 def warehouse(request):
-    dbname = getsecret("dbname")
+    import psycopg2
+    dbname = getsecret("dbname", 1)
     user = "postgres"
-    password = getsecret("dbpassword")
+    password = getsecret("dbpassword", 1)
     host = '/cloudsql/week10-1-324606:us-central1:petshop'
     conn = None
-    SQL = "SELECT * FROM warehouse;"
+    SQL = "SELECT * FROM customer;"
     results = []
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
@@ -31,5 +28,5 @@ def warehouse(request):
             print(error)
     finally:
         if conn is not None:
-            conn.close()
-    return results
+            conn.close()        
+    return "\n".join(results)
