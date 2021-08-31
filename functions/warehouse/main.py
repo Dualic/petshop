@@ -13,4 +13,16 @@ def warehouse(request):
     dbname = getsecret("dbname")
     user = "postgres"
     password = getsecret("dbpassword")
-    conn = psycopg2.connect(host='/cloudsql/week10-1-324606:us-central1:petshop', dbname=dbname, user=user,  password=password)
+
+    SQL = "SELECT * FROM user;"
+    try:
+        conn = psycopg2.connect(host='/cloudsql/week10-1-324606:us-central1:petshop', dbname=dbname, user=user,  password=password)
+        cursor = conn.cursor()
+        cursor.execute(SQL,)
+        conn.commit()
+    except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+        cursor.close()
