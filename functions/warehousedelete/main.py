@@ -5,7 +5,7 @@ def getsecret(secretname, version):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-def customerdelete(request):
+def warehousedelete(request):
     import psycopg2
     dbname = getsecret("dbname", 1)
     user = "postgres"
@@ -14,7 +14,7 @@ def customerdelete(request):
     conn = None
     request_json = request.get_json(silent=True)
     id = request_json.get("id")
-    SQL = "DELETE FROM customer WHERE id = %s;"
+    SQL = "DELETE FROM product WHERE id = %s;"
     result = "Delete failed"
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)

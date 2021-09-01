@@ -5,15 +5,14 @@ def getsecret(secretname, version):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-def warehouseget(request):
+def productgetall(request):
     import psycopg2, json
     dbname = getsecret("dbname", 1)
     user = "postgres"
     password = getsecret("dbpassword", 1)
     host = getsecret("host", 1)
     conn = None
-    id = request.args.get('id')
-    SQL = f"SELECT * FROM warehouse WHERE id={id};"
+    SQL = "SELECT * FROM product;"
     results = {}
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
@@ -22,10 +21,10 @@ def warehouseget(request):
         #conn.commit()
         row = cursor.fetchone()
         while row is not None:
-            results["id"] = row[0]
-            results["name"] = row[1]
-            results["product_id"] = row[2]
-            results["amount"] = row[3]
+            results[row[0]]["name"] = row[1]
+            results[row[0]]["price"] = row[2]
+            results[row[0]]["category"] = row[3]
+            #results.append(str(row))
             row = cursor.fetchone()
         cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:

@@ -14,9 +14,9 @@ def warehouseadd(request):
     conn = None
     request_json = request.get_json(silent=True)
     #id = request_json.get("id")
-    name = int(request_json.get("name"))
-    product_id = int(request_json.get("product_id"))
-    amount = int(request_json.get("amount"))
+    name = request_json.get("name")
+    product_id = request_json.get("product_id")
+    amount = request_json.get("amount")
     SQL = "INSERT INTO warehouse(name, product_id, amount) VALUES (%s,%s,%s);"
     result = "Insert failed"
     try:
