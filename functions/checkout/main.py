@@ -5,7 +5,7 @@ def getsecret(secretname, version):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-def createtables(request):
+def checkout(request):
     import psycopg2, json
     dbname = getsecret("dbname", 1)
     user = "postgres"
@@ -17,6 +17,7 @@ def createtables(request):
     SQL1 = "SELECT id, product_id, amount FROM cart WHERE customer_id =%s;"
     SQL2 = "SELECT amount FROM warehouse WHERE product_id = %s;"
     SQL3 = "UPDATE warehouse SET amount = %s WHERE product_id = %s;"
+    SQL4 = "DELETE FROM cart WHERE customer_id = %s;"
     basket= {}
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
@@ -40,6 +41,8 @@ def createtables(request):
             #Transaction can continue. Reduce the amount of warehouse items.
             newamount = itemsinwarehouse - item["amount"]
             cursor.execute(SQL3, (newamount, item["product_id"],))
+        #Empty the cart if all successful this far. Then commit the changes.
+        cursor.execute(SQL4, (customer_id,))
         conn.commit()
         cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
