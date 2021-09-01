@@ -4,6 +4,7 @@ info:
   title: Petshop cart API
   description: Clientside shopping cart API for petshop
   version: 1.0.0
+host: "petshop-api-gateway-2c7dw4u2.uc.gateway.dev"
 schemes:
   - https
 produces:
@@ -489,6 +490,8 @@ paths:
       summary: Find product by warehouse ID
       description: Returns a single product
       operationId: warehouseget
+      x-google-backend:
+          address: https://us-central1-week10-1-324606.cloudfunctions.net/warehouseget
       produces:
       - application/json
       parameters:
