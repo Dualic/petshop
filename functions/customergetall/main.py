@@ -5,15 +5,15 @@ def getsecret(secretname, version):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-def customergetall(request):
-    import psycopg2
+def cartgetall(request):
+    import psycopg2, json
     dbname = getsecret("dbname", 1)
     user = "postgres"
     password = getsecret("dbpassword", 1)
     host = getsecret("host", 1)
     conn = None
     SQL = "SELECT * FROM customer;"
-    results = []
+    results = {}
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
         cursor = conn.cursor()
@@ -21,7 +21,9 @@ def customergetall(request):
         #conn.commit()
         row = cursor.fetchone()
         while row is not None:
-            results.append(str(row))
+            results[row[0]]["name"] = row[1]
+            results[row[0]]["address"] = row[2]
+            results[row[0]]["email"] = row[3]
             row = cursor.fetchone()
         cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -29,4 +31,4 @@ def customergetall(request):
     finally:
         if conn is not None:
             conn.close()      
-    return "\n".join(results)
+    return json.dumps(results), 200, {'ContentType':'application/json'}
