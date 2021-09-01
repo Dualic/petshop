@@ -4,9 +4,9 @@ info:
   title: Petshop cart API
   description: Clientside shopping cart API for petshop
   version: 1.0.0
-host: "petshop-api-14og3y1868rgn.apigateway.week10-1-324606.cloud.goog"
+host: "petshop-api-gateway-2c7dw4u2.uc.gateway.dev"
 x-google-endpoints:
-- name: "petshop-api-14og3y1868rgn.apigateway.week10-1-324606.cloud.goog"
+- name: "petshop-api-gateway-2c7dw4u2.uc.gateway.dev"
   allowCors: True
 schemes:
 - "https"
