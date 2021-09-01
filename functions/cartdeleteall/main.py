@@ -5,7 +5,7 @@ def getsecret(secretname, version):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-def productupdate(request):
+def cartdeleteall(request):
     import psycopg2
     dbname = getsecret("dbname", 1)
     user = "postgres"
@@ -13,19 +13,16 @@ def productupdate(request):
     host = getsecret("host", 1)
     conn = None
     request_json = request.get_json(silent=True)
-    id = request_json.get("id")
-    name = request_json.get("name")
-    price = request_json.get("price")
-    category = request_json.get("category")
-    SQL = "UPDATE product SET name = %s, price = %s, category = %s WHERE id = %s;"
-    result = "Update failed"
+    #id = request_json.get("id")
+    SQL = "DELETE FROM cart;"
+    result = "Delete failed"
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
         cursor = conn.cursor()
-        cursor.execute(SQL, (name, price, category, id))
+        cursor.execute(SQL)
         conn.commit()
         cursor.close()
-        result = "Update success"
+        result = "Delete success"
     except (Exception, psycopg2.DatabaseError) as error:
             print(error)
     finally:
