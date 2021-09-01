@@ -21,6 +21,7 @@ def cartgetall(request):
         #conn.commit()
         row = cursor.fetchone()
         while row is not None:
+            results[row[0]] = {}
             results[row[0]]["user_id"] = row[1]
             results[row[0]]["product_id"] = row[2]
             results[row[0]]["amount"] = row[3]
