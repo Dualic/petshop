@@ -461,6 +461,7 @@ paths:
       operationId: warehousegetall
       x-google-backend:
           address: https://us-central1-week10-1-324606.cloudfunctions.net/warehousegetall
+          allowCors: True
       produces:
       - application/json
       parameters: []
