@@ -5,30 +5,29 @@ def getsecret(secretname, version):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-def itemupdatecart(request):
+def warehousegetall(request):
     import psycopg2
     dbname = getsecret("dbname", 1)
     user = "postgres"
     password = getsecret("dbpassword", 1)
     host = getsecret("host", 1)
     conn = None
-    request_json = request.get_json(silent=True)
-    id = request_json.get("id")
-    user_id = int(request_json.get("user_id"))
-    product_id = int(request_json.get("product_id"))
-    amount = int(request_json.get("amount"))
-    SQL = "UPDATE cart SET user_id = %s, product_id = %s, amount = %s WHERE id = %s;"
-    result = "Update failed"
+    id = request.args.get('id')
+    SQL = f"SELECT name, amount FROM warehouse WHERE id={id};"
+    results = []
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
         cursor = conn.cursor()
-        cursor.execute(SQL, (user_id, product_id, amount, id))
-        conn.commit()
+        cursor.execute(SQL)
+        #conn.commit()
+        row = cursor.fetchone()
+        while row is not None:
+            results.append(str(row))
+            row = cursor.fetchone()
         cursor.close()
-        result = "Update success"
     except (Exception, psycopg2.DatabaseError) as error:
             print(error)
     finally:
         if conn is not None:
             conn.close()      
-    return result
+    return "\n".join(results)

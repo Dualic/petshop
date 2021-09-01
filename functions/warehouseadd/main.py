@@ -5,7 +5,7 @@ def getsecret(secretname, version):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-def itemaddcart(request):
+def warehouseadd(request):
     import psycopg2
     dbname = getsecret("dbname", 1)
     user = "postgres"
@@ -14,15 +14,15 @@ def itemaddcart(request):
     conn = None
     request_json = request.get_json(silent=True)
     #id = request_json.get("id")
-    user_id = int(request_json.get("user_id"))
+    name = int(request_json.get("name"))
     product_id = int(request_json.get("product_id"))
     amount = int(request_json.get("amount"))
-    SQL = "INSERT INTO cart(user_id, product_id, amount) VALUES (%s,%s,%s);"
+    SQL = "INSERT INTO warehouse(name, product_id, amount) VALUES (%s,%s,%s);"
     result = "Insert failed"
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
         cursor = conn.cursor()
-        cursor.execute(SQL, (user_id, product_id, amount))
+        cursor.execute(SQL, (name, product_id, amount))
         conn.commit()
         cursor.close()
         result = "Insert success"
