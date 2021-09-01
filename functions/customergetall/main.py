@@ -21,6 +21,7 @@ def customergetall(request):
         #conn.commit()
         row = cursor.fetchone()
         while row is not None:
+            results[row[0]] = {}
             results[row[0]]["name"] = row[1]
             results[row[0]]["address"] = row[2]
             results[row[0]]["email"] = row[3]
