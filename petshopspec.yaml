@@ -5,6 +5,9 @@ info:
   description: Clientside shopping cart API for petshop
   version: 1.0.0
 host: "petshop-api-gateway-2c7dw4u2.uc.gateway.dev"
+x-google-endpoints:
+- name: "us-central1-week10-1-324606.cloudfunctions.net"
+  allowCors: True
 schemes:
   - https
 produces:
@@ -461,7 +464,6 @@ paths:
       operationId: warehousegetall
       x-google-backend:
           address: https://us-central1-week10-1-324606.cloudfunctions.net/warehousegetall
-          allowCors: True
       produces:
       - application/json
       parameters: []
