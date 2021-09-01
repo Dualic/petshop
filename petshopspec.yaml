@@ -4,12 +4,13 @@ info:
   title: Petshop cart API
   description: Clientside shopping cart API for petshop
   version: 1.0.0
-host: "petshop-api-gateway-2c7dw4u2.uc.gateway.dev"
+host: "petshop-api-14og3y1868rgn.apigateway.week10-1-324606.cloud.goog"
 x-google-endpoints:
-- name: "us-central1-week10-1-324606.cloudfunctions.net"
+- name: "petshop-api-14og3y1868rgn.apigateway.week10-1-324606.cloud.goog"
   allowCors: True
 schemes:
-  - https
+- "https"
+- "http"
 produces:
   - application/json
 paths:
@@ -21,6 +22,7 @@ paths:
       operationId: cartadd
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/cartadd
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -75,6 +77,7 @@ paths:
       operationId: cartupdate
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/cartupdate
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -110,6 +113,7 @@ paths:
       operationId: cartgetall
       x-google-backend:
           address: https://us-central1-week10-1-324606.cloudfunctions.net/cartgetall
+          allowCors: True
       produces:
       - application/json
       parameters: []
@@ -137,6 +141,7 @@ paths:
       operationId: customeradd
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/customeradd
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -167,6 +172,7 @@ paths:
       operationId: customerdelete
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/customerdelete
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -191,6 +197,7 @@ paths:
       operationId: customerupdate
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/customerupdate
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -226,6 +233,7 @@ paths:
       operationId: customergetall
       x-google-backend:
           address: https://us-central1-week10-1-324606.cloudfunctions.net/customergetall
+          allowCors: True
       produces:
       - application/json
       parameters: []
@@ -256,6 +264,7 @@ paths:
       operationId: productadd
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/productadd
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -286,6 +295,7 @@ paths:
       operationId: productdelete
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/productdelete
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -310,6 +320,7 @@ paths:
       operationId: productupdate
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/productupdate
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -345,6 +356,7 @@ paths:
       operationId: productgetall
       x-google-backend:
           address: https://us-central1-week10-1-324606.cloudfunctions.net/productgetall
+          allowCors: True
       produces:
       - application/json
       parameters: []
@@ -375,6 +387,7 @@ paths:
       operationId: warehouseadd
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/warehouseadd
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -405,6 +418,7 @@ paths:
       operationId: warehousedelete
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/warehousedelete
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -429,6 +443,7 @@ paths:
       operationId: warehouseupdate
       x-google-backend:
         address: https://us-central1-week10-1-324606.cloudfunctions.net/warehouseupdate
+        allowCors: True
       consumes:
         - application/json
       parameters:
@@ -494,7 +509,7 @@ paths:
       description: Returns a single product
       operationId: warehouseget
       x-google-backend:
-          address: https://us-central1-week10-1-324606.cloudfunctions.net/warehouseget
+          address: https://us-central1-week10-1-324606.cloudfunctions.net/
       produces:
       - application/json
       parameters:
