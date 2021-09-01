@@ -12,10 +12,10 @@ def warehousedelete(request):
     password = getsecret("dbpassword", 1)
     host = getsecret("host", 1)
     conn = None
-    SQL1 = ";"
-    SQL2 = ";"
-    SQL3 = ";"
-    SQL4 = ";"
+    SQL1 = "CREATE TABLE IF NOT EXISTS customer (id SERIAL PRIMARY KEY, name VARCHAR(255), address VARCHAR(255), email VARCHAR(255));"
+    SQL2 = "CREATE TABLE IF NOT EXISTS product (id SERIAL PRIMARY KEY, name VARCHAR(255), price INT, category VARCHAR(255));"
+    SQL3 = "CREATE TABLE IF NOT EXISTS warehouse (id SERIAL PRIMARY KEY, name VARCHAR(255), product_id INT, amount INT, CONSTRAINT fk_product FOREIGN KEY(product_id) REFERENCES product(id));"
+    SQL4 = "CREATE TABLE IF NOT EXISTS cart (id SERIAL PRIMARY KEY, customer_id INT, product_id INT, amount INT, CONSTRAINT fk_customer FOREIGN KEY(customer_id) REFERENCES customer(id), CONSTRAINT fk_product FOREIGN KEY(product_id) REFERENCES product(id));"
     result = "Creation of tables failed"
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
