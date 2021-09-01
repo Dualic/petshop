@@ -14,9 +14,9 @@ def cartupdate(request):
     conn = None
     request_json = request.get_json(silent=True)
     id = request_json.get("id")
-    user_id = int(request_json.get("user_id"))
-    product_id = int(request_json.get("product_id"))
-    amount = int(request_json.get("amount"))
+    user_id = request_json.get("user_id")
+    product_id = request_json.get("product_id")
+    amount = request_json.get("amount")
     SQL = "UPDATE cart SET user_id = %s, product_id = %s, amount = %s WHERE id = %s;"
     result = "Update failed"
     try:

@@ -15,14 +15,14 @@ def customerupdate(request):
     request_json = request.get_json(silent=True)
     id = request_json.get("id")
     name = request_json.get("name")
-    address = request_json.get("address")
-    email = request_json.get("email")
-    SQL = "UPDATE customer SET name = %s, address = %s, email = %s WHERE id = %s;"
+    price = request_json.get("price")
+    category = request_json.get("category")
+    SQL = "UPDATE product SET name = %s, price = %s, category = %s WHERE id = %s;"
     result = "Update failed"
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
         cursor = conn.cursor()
-        cursor.execute(SQL, (name, address, email, id))
+        cursor.execute(SQL, (name, price, category, id))
         conn.commit()
         cursor.close()
         result = "Update success"

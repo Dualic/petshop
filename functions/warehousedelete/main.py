@@ -14,7 +14,7 @@ def warehousedelete(request):
     conn = None
     request_json = request.get_json(silent=True)
     id = request_json.get("id")
-    SQL = "DELETE FROM product WHERE id = %s;"
+    SQL = "DELETE FROM warehouse WHERE id = %s;"
     result = "Delete failed"
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
