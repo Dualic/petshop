@@ -1,16 +1,34 @@
-def getsecret(secretname, version):
+def getsecret(secretname):
     import google.cloud.secretmanager as secretmanager
     client = secretmanager.SecretManagerServiceClient()
-    name = f"projects/week10-1-324606/secrets/{secretname}/versions/{version}"
+    name = f"projects/week10-1-324606/secrets/{secretname}/versions/latest"
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+def send_email_notification(boughtitems):
+    message = Mail(
+        from_email='ilkka.pekkala@awacademyconsultant.fi',
+        to_emails='ilkka.pekkala@awacademyconsultant.fi',
+        subject='Your receipt',
+        html_content=boughtitems)
+    try:
+        sg = SendGridAPIClient(getsecret("SENDGRID_EMAIL_API_KEY"))
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e)
+
 def checkout(request):
     import psycopg2, json
-    dbname = getsecret("dbname", 1)
+    dbname = getsecret("dbname")
     user = "postgres"
-    password = getsecret("dbpassword", 1)
-    host = getsecret("host", 1)
+    password = getsecret("dbpassword")
+    host = getsecret("host")
     conn = None
     request_json = request.get_json(silent=True)
     customer_id = request_json.get("customer_id")
@@ -18,7 +36,11 @@ def checkout(request):
     SQL2 = "SELECT amount FROM warehouse WHERE product_id = %s;"
     SQL3 = "UPDATE warehouse SET amount = %s WHERE product_id = %s;"
     SQL4 = "DELETE FROM cart WHERE customer_id = %s;"
+    SQL5 = "SELECT name, price FROM product WHERE id = %s;"
     basket= {}
+    receipt = []
+    receipt.append("You bought the following items:")
+    totalsum = 0
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
         cursor = conn.cursor()
@@ -36,15 +58,25 @@ def checkout(request):
             cursor.execute(SQL2, (basket[item]["product_id"],))
             row = cursor.fetchone()
             itemsinwarehouse = row[0]
-            if itemsinwarehouse < basket[item]["amount"]:
+            boughtamount = basket[item]["amount"]
+            if itemsinwarehouse < boughtamount:
                 return "You can't buy that many!"
             #Transaction can continue. Reduce the amount of warehouse items.
-            newamount = itemsinwarehouse - basket[item]["amount"]
-            cursor.execute(SQL3, (newamount, basket[item]["product_id"],))
+            newamount = itemsinwarehouse - boughtamount
+            cursor.execute(SQL3, (newamount, basket[item]["product_id"]))
+            cursor.execute(SQL5, (basket[item]["product_id"],))
+            row2 = cursor.fetchone()
+            receipt.append(f"Product: {row2[0]}, amount: {boughtamount},  price per item: {row2[1]}")
+            totalsum += (boughtamount * row2[1])
+
         #Empty the cart if all successful this far. Then commit the changes.
         cursor.execute(SQL4, (customer_id,))
         conn.commit()
         cursor.close()
+        #Compose email and send it.
+        receipt.append(f"Total sum of all products is {totalsum}")
+        mymessage = "\n".join(receipt)
+        send_email_notification(mymessage)
     except (Exception, psycopg2.DatabaseError) as error:
             print(error)
     finally:

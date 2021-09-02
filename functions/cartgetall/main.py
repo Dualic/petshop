@@ -1,16 +1,16 @@
-def getsecret(secretname, version):
+def getsecret(secretname):
     import google.cloud.secretmanager as secretmanager
     client = secretmanager.SecretManagerServiceClient()
-    name = f"projects/week10-1-324606/secrets/{secretname}/versions/{version}"
+    name = f"projects/week10-1-324606/secrets/{secretname}/versions/latest"
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
 def cartgetall(request):
     import psycopg2, json
-    dbname = getsecret("dbname", 1)
+    dbname = getsecret("dbname")
     user = "postgres"
-    password = getsecret("dbpassword", 1)
-    host = getsecret("host", 1)
+    password = getsecret("dbpassword")
+    host = getsecret("host")
     conn = None
     SQL = "SELECT * FROM cart;"
     results = {}
@@ -22,7 +22,7 @@ def cartgetall(request):
         row = cursor.fetchone()
         while row is not None:
             results[row[0]] = {}
-            results[row[0]]["user_id"] = row[1]
+            results[row[0]]["customer_id"] = row[1]
             results[row[0]]["product_id"] = row[2]
             results[row[0]]["amount"] = row[3]
             row = cursor.fetchone()

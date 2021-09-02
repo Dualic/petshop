@@ -1,16 +1,16 @@
-def getsecret(secretname, version):
+def getsecret(secretname):
     import google.cloud.secretmanager as secretmanager
     client = secretmanager.SecretManagerServiceClient()
-    name = f"projects/week10-1-324606/secrets/{secretname}/versions/{version}"
+    name = f"projects/week10-1-324606/secrets/{secretname}/versions/latest"
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
 def customergetall(request):
     import psycopg2, json
-    dbname = getsecret("dbname", 1)
+    dbname = getsecret("dbname")
     user = "postgres"
-    password = getsecret("dbpassword", 1)
-    host = getsecret("host", 1)
+    password = getsecret("dbpassword")
+    host = getsecret("host")
     conn = None
     SQL = "SELECT * FROM customer;"
     results = {}
