@@ -14,7 +14,7 @@ resource "google_api_gateway_api_config" "api_cfg4" {
   openapi_documents {
     document {
       path = var.path
-      contents = filebase64("pet.yaml")
+      contents = filebase64("petshopspec.yaml")
     }
   }
   lifecycle {
