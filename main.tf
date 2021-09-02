@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket  = var.project_id
+    bucket  = "week10-1-324606"
  prefix  = "terraform/state"
   }
   required_providers {
