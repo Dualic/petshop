@@ -1,0 +1,11 @@
+steps:
+  - name: 'hashicorp/terraform:1.0.0'
+    args:
+      - init
+    id: terraform-init
+  - name: 'hashicorp/terraform:1.0.0'
+    args:
+      - terraform apply
+      - '-auto-approve'
+    id: terraformapply
+    timeout: 3600s
