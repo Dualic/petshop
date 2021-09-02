@@ -73,6 +73,10 @@ def checkout(request):
         cursor.execute(SQL4, (customer_id,))
         conn.commit()
         cursor.close()
+        #Compose email and send it.
+        receipt.append(f"Total sum of all products is {totalsum}")
+        mymessage = "\n".join(receipt)
+        send_email_notification(mymessage)
     except (Exception, psycopg2.DatabaseError) as error:
             print(error)
     finally:
