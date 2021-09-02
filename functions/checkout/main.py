@@ -33,14 +33,14 @@ def checkout(request):
             row = cursor.fetchone()
         #Check that there is enough of each item.
         for item in basket:
-            cursor.execute(SQL2, (item["product_id"],))
+            cursor.execute(SQL2, (basket[item]["product_id"],))
             row = cursor.fetchone()
             itemsinwarehouse = row[0]
-            if itemsinwarehouse < item["amount"]:
+            if itemsinwarehouse < basket[item]["amount"]:
                 return "You can't buy that many!"
             #Transaction can continue. Reduce the amount of warehouse items.
-            newamount = itemsinwarehouse - item["amount"]
-            cursor.execute(SQL3, (newamount, item["product_id"],))
+            newamount = itemsinwarehouse - basket[item]["amount"]
+            cursor.execute(SQL3, (newamount, basket[item]["product_id"],))
         #Empty the cart if all successful this far. Then commit the changes.
         cursor.execute(SQL4, (customer_id,))
         conn.commit()
