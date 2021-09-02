@@ -17,7 +17,7 @@ def cartadd(request):
     customer_id = request_json.get("customer_id")
     product_id = request_json.get("product_id")
     amount = request_json.get("amount")
-    SQL = "INSERT INTO cart(user_id, product_id, amount) VALUES (%s,%s,%s);"
+    SQL = "INSERT INTO cart(customer_id, product_id, amount) VALUES (%s,%s,%s);"
     result = "Insert failed"
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
