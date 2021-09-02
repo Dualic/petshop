@@ -34,8 +34,8 @@ variable "environment_variables" {
 }
 
 variable "source_repository_url" {
-  type        = string
-  default = list["https://source.developers.google.com/projects/week10-1-324606/repos/github_dualic_petshop/moveable-aliases/master/paths/functions/cartadd",
+  type        = list(string)
+  default = ["https://source.developers.google.com/projects/week10-1-324606/repos/github_dualic_petshop/moveable-aliases/master/paths/functions/cartadd",
   "https://source.developers.google.com/projects/week10-1-324606/repos/github_dualic_petshop/moveable-aliases/master/paths/functions/cartdelete",
   "https://source.developers.google.com/projects/week10-1-324606/repos/github_dualic_petshop/moveable-aliases/master/paths/functions/cartdeleteall",
   "https://source.developers.google.com/projects/week10-1-324606/repos/github_dualic_petshop/moveable-aliases/master/paths/functions/cartgetall",
