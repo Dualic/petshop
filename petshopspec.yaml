@@ -126,6 +126,31 @@ paths:
           description: Invalid ID supplied
         404:
           description: Cart not found
+  /cart/delete:
+    delete:
+      tags:
+      - "cart"
+      summary: remove cart
+      operationId: cartdeleteall
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/cartdeleteall
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          description: The customer whose cart to delete
+          schema:
+            type: object
+            properties:
+              customer_id:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
   /customer:
     post:
       tags:
@@ -519,3 +544,28 @@ paths:
           description: Invalid ID supplied
         404:
           description: Product not found
+  /checkout:
+    put:
+      tags:
+      - "checkout"
+      summary: checkout the current cart
+      operationId: checkout
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/checkout
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: customer
+          description: The customer whose cart to checkout.
+          schema:
+            type: object
+            properties:
+              customer_id:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
