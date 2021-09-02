@@ -199,3 +199,4 @@ steps:
   - --source=./functions/warehouseupdate/
   - --trigger-http
   - --runtime=python39
+timeout: 3600s
