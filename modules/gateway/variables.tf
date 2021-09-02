@@ -14,7 +14,7 @@ variable "api_config_id" {
 variable "path" {
   type        = string
   description = "Path for the YAML file with the API configuration"
-  default = ".\\pet.yaml"
+  default = "petshopspec.yaml"
 }
 
 variable "project_id" {
