@@ -14,7 +14,7 @@ def cartupdate(request):
     conn = None
     request_json = request.get_json(silent=True)
     id = request_json.get("id")
-    user_id = request_json.get("user_id")
+    customer_id = request_json.get("customer_id")
     product_id = request_json.get("product_id")
     amount = request_json.get("amount")
     SQL = "UPDATE cart SET user_id = %s, product_id = %s, amount = %s WHERE id = %s;"
@@ -22,7 +22,7 @@ def cartupdate(request):
     try:
         conn = psycopg2.connect(host=host, dbname=dbname, user=user,  password=password)
         cursor = conn.cursor()
-        cursor.execute(SQL, (user_id, product_id, amount, id))
+        cursor.execute(SQL, (customer_id, product_id, amount, id))
         conn.commit()
         cursor.close()
         result = "Update success"
