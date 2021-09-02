@@ -9,3 +9,4 @@ Sensitive information is hidden in GCP Secret Manager. Cloud Functions have acce
 
 All infrastructure can be created through Terraform.
 CI/CD pipeline mirrors the GitHub repository to GCP Cloud Source Repository. Cloud Build can then build any changes to infrastructure through Terraform.
+Updating the cloud functions are done through a separate Cloud Build.
