@@ -6,10 +6,9 @@ steps:
   - deploy
   - cartadd
   - --region=us-central1
-  - --source=./cartadd
+  - --source=./cartadd/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -17,10 +16,9 @@ steps:
   - deploy
   - cartdelete
   - --region=us-central1
-  - --source=./cartdelete
+  - --source=./cartdelete/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -28,10 +26,9 @@ steps:
   - deploy
   - cartdeleteall
   - --region=us-central1
-  - --source=./cartdeleteall
+  - --source=./cartdeleteall/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -39,10 +36,9 @@ steps:
   - deploy
   - cartgetall
   - --region=us-central1
-  - --source=./cartgetall
+  - --source=./cartgetall/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -50,10 +46,9 @@ steps:
   - deploy
   - cartupdate
   - --region=us-central1
-  - --source=./cartupdate
+  - --source=./cartupdate/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -61,10 +56,9 @@ steps:
   - deploy
   - checkout
   - --region=us-central1
-  - --source=./checkout
+  - --source=./checkout/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -72,10 +66,9 @@ steps:
   - deploy
   - createtables
   - --region=us-central1
-  - --source=./createtables
+  - --source=./createtables/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -83,10 +76,9 @@ steps:
   - deploy
   - customeradd
   - --region=us-central1
-  - --source=./customeradd
+  - --source=./customeradd/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -94,10 +86,9 @@ steps:
   - deploy
   - customerdelete
   - --region=us-central1
-  - --source=./customerdelete
+  - --source=./customerdelete/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -105,10 +96,9 @@ steps:
   - deploy
   - customergetall
   - --region=us-central1
-  - --source=./customergetall
+  - --source=./customergetall/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -116,10 +106,9 @@ steps:
   - deploy
   - customerupdate
   - --region=us-central1
-  - --source=./customerupdate
+  - --source=./customerupdate/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -127,10 +116,9 @@ steps:
   - deploy
   - productadd
   - --region=us-central1
-  - --source=./productadd
+  - --source=./productadd/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -138,10 +126,9 @@ steps:
   - deploy
   - productdelete
   - --region=us-central1
-  - --source=./productdelete
+  - --source=./productdelete/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -149,10 +136,9 @@ steps:
   - deploy
   - productgetall
   - --region=us-central1
-  - --source=./productgetall
+  - --source=./productgetall/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -160,10 +146,9 @@ steps:
   - deploy
   - productupdate
   - --region=us-central1
-  - --source=./productupdate
+  - --source=./productupdate/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -171,10 +156,9 @@ steps:
   - deploy
   - warehouseadd
   - --region=us-central1
-  - --source=./warehouseadd
+  - --source=./warehouseadd/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -182,10 +166,9 @@ steps:
   - deploy
   - warehousedelete
   - --region=us-central1
-  - --source=./warehousedelete
+  - --source=./warehousedelete/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -193,10 +176,9 @@ steps:
   - deploy
   - warehouseget
   - --region=us-central1
-  - --source=./warehouseget
+  - --source=./warehouseget/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -204,10 +186,9 @@ steps:
   - deploy
   - warehousegetall
   - --region=us-central1
-  - --source=./warehousegetall
+  - --source=./warehousegetall/
   - --trigger-http
   - --runtime=python39
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -215,6 +196,6 @@ steps:
   - deploy
   - warehouseupdate
   - --region=us-central1
-  - --source=./warehouseupdate
+  - --source=./warehouseupdate/
   - --trigger-http
   - --runtime=python39
