@@ -14,7 +14,7 @@ variable "api_config_id" {
 variable "path" {
   type        = string
   description = "Path for the YAML file with the API configuration"
-  default = "C:\\Users\\MikkoMalm\\Desktop\\AW Academy - Practice\\Week_10\\project_terraform\\pet.yaml"
+  default = ".\\pet.yaml"
 }
 
 variable "project_id" {
