@@ -7,6 +7,5 @@ When the user checks out, a receipt is sent to the customer by email.
 The API supports all CRUD operations for four different tables in database.
 Sensitive information is hidden in GCP Secret Manager. Cloud Functions have access to them.
 
-All infrastructure can be created through Terraform.
-CI/CD pipeline mirrors the GitHub repository to GCP Cloud Source Repository. Cloud Build can then build any changes to infrastructure through Terraform.
-Updating the cloud functions are done through a separate Cloud Build.
+All infrastructure can be created through Terraform... but using Cloud Build for it encountered a problem with variables. Apparently we'd need to host the variables file in a GCP bucket.
+Updating the cloud functions are done through a separate Cloud Build. Any Pull Request to Master triggers the build.
