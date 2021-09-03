@@ -1,0 +1,571 @@
+# openapi2-functions.yaml
+swagger: '2.0'
+info:
+  title: Petshop cart API
+  description: Clientside shopping cart API for petshop
+  version: 1.0.0
+host: "petshopui-zw3ucd5rfq-uc.a.run.app"
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /cart:
+    post:
+      tags:
+      - "cart"
+      summary: add to cart
+      operationId: cartadd
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/cartadd
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          description: The item to add.
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                default: 0
+              product_id:
+                type: integer
+                default: 0
+              amount:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    delete:
+      tags:
+      - "cart"
+      summary: remove from cart
+      operationId: cartdelete
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/cartdelete
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          description: The item to delete.
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    put:
+      tags:
+      - "cart"
+      summary: update item in cart
+      operationId: cartupdate
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/cartupdate
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          description: The item to update.
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 0
+              user_id:
+                type: integer
+                default: 0
+              product_id:
+                type: integer
+                default: 0
+              amount:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string 
+  /cart/all:
+    get:
+      tags:
+      - "cart"
+      summary: get cart
+      description: returns the content of the cart
+      operationId: cartgetall
+      x-google-backend:
+          address: https://us-central1-week10-1-324606.cloudfunctions.net/cartgetall
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              product_name:
+                type: string
+                default: "null"
+              amount:
+                type: integer
+                default: 0
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Cart not found
+  /cart/delete:
+    delete:
+      tags:
+      - "cart"
+      summary: remove cart
+      operationId: cartdeleteall
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/cartdeleteall
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          description: The customer whose cart to delete
+          schema:
+            type: object
+            properties:
+              customer_id:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+  /customer:
+    post:
+      tags:
+      - "customer"
+      summary: add customer
+      operationId: customeradd
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/customeradd
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: customer
+          description: The customer to add.
+          schema:
+            type: object
+            properties:
+              name:
+                type: integer
+                default: "null"
+              address:
+                type: string
+                default: "null"
+              email:
+                type: string
+                default: "null"
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    delete:
+      tags:
+      - "customer"
+      summary: remove customer
+      operationId: customerdelete
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/customerdelete
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: customer
+          description: The customer to delete.
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    put:
+      tags:
+      - "customer"
+      summary: update customer
+      operationId: customerupdate
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/customerupdate
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: customer
+          description: The customer to update.
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 0
+              name:
+                type: string
+                default: "null"
+              address:
+                type: string
+                default: "null"
+              email:
+                type: string
+                default: "null"
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string 
+  /customer/all:
+    get:
+      tags:
+      - "customer"
+      summary: get all customers
+      description: returns all customers
+      operationId: customergetall
+      x-google-backend:
+          address: https://us-central1-week10-1-324606.cloudfunctions.net/customergetall
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                default: "null"
+              address:
+                type: string
+                default: "null"
+              email:
+                type: string
+                default: "null"
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Customer not found
+  /product:
+    post:
+      tags:
+      - "product"
+      summary: add product
+      operationId: productadd
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/productadd
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: product
+          description: The product to add.
+          schema:
+            type: object
+            properties:
+              name:
+                type: integer
+                default: "null"
+              price:
+                type: integer
+                default: 0
+              category:
+                type: string
+                default: "null"
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    delete:
+      tags:
+      - "product"
+      summary: remove product
+      operationId: productdelete
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/productdelete
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: product
+          description: The product to delete.
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    put:
+      tags:
+      - "product"
+      summary: update product
+      operationId: productupdate
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/productupdate
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: product
+          description: The product to update.
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 0
+              name:
+                type: string
+                default: "null"
+              price:
+                type: integer
+                default: 0
+              category:
+                type: string
+                default: "null"
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+  /product/all:
+    get:
+      tags:
+      - "product"
+      summary: get all products
+      description: returns all products
+      operationId: productgetall
+      x-google-backend:
+          address: https://us-central1-week10-1-324606.cloudfunctions.net/productgetall
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                default: "null"
+              address:
+                type: string
+                default: "null"
+              email:
+                type: string
+                default: "null"
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Product not found
+  /warehouse:
+    post:
+      tags:
+      - "warehouse"
+      summary: add product to warehouse
+      operationId: warehouseadd
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/warehouseadd
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: product
+          description: The product to add.
+          schema:
+            type: object
+            properties:
+              name:
+                type: integer
+                default: "null"
+              product_id:
+                type: integer
+                default: 0
+              amount:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    delete:
+      tags:
+      - "warehouse"
+      summary: remove product from warehouse
+      operationId: warehousedelete
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/warehousedelete
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: product
+          description: The product to delete.
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+    put:
+      tags:
+      - "warehouse"
+      summary: update product in warehouse
+      operationId: warehouseupdate
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/warehouseupdate
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: product
+          description: The product to update.
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 0
+              name:
+                type: string
+                default: "null"
+              product_id:
+                type: integer
+                default: 0
+              amount:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+  /warehouse/all:
+    get:
+      tags:
+      - "warehouse"
+      summary: get all products in warehouse
+      description: returns all products in warehouse
+      operationId: warehousegetall
+      x-google-backend:
+          address: https://us-central1-week10-1-324606.cloudfunctions.net/warehousegetall
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                default: "null"
+              product_id:
+                type: integer
+                default: 0
+              amount:
+                type: integer
+                default: 0
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Product not found
+  /warehouse/{id}:
+    get:
+      tags:
+      - "warehouse"
+      summary: Find product by warehouse ID
+      description: Returns a single product
+      operationId: warehouseget
+      x-google-backend:
+          address: https://us-central1-week10-1-324606.cloudfunctions.net/warehouseget
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: ID of product to return
+        required: true
+        type: integer
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                default: "null"
+              product_id:
+                type: integer
+                default: 0
+              amount:
+                type: integer
+                default: 0
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Product not found
+  /checkout:
+    put:
+      tags:
+      - "checkout"
+      summary: checkout the current cart
+      operationId: checkout
+      x-google-backend:
+        address: https://us-central1-week10-1-324606.cloudfunctions.net/checkout
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: customer
+          description: The customer whose cart to checkout.
+          schema:
+            type: object
+            properties:
+              customer_id:
+                type: integer
+                default: 0
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
